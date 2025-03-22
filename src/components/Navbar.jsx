@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 export default function Navbar() {
   const[storeList,setStoreList] = useState([]);
-
+  const navigate = useNavigate();
   async function fetchStoreName(){
    try {
     let res = await fetch('http://localhost/product_api/list-storename.php');
@@ -13,6 +13,13 @@ export default function Navbar() {
    } catch (error) {
     console.log(error);
    }
+  }
+
+  async function handleSearch(e){
+    if(e.key === 'Enter'){
+       console.log(e.target.value);
+      navigate(`/products/${e.target.value}`);
+     }
   }
 
   useEffect(function(){
@@ -33,7 +40,7 @@ export default function Navbar() {
             <ul className="navbar-nav ms-auto"> 
             <div id='searchbox'>
                  <i class="fa-solid fa-magnifying-glass text-primary fw-bold"></i>
-                 <input type="text" placeholder='Search deals' id='searchinput'  />
+                 <input type="text" placeholder='Search deals' id='searchinput' onKeyDown={handleSearch}  />
             </div>
 
             <li class="nav-item">

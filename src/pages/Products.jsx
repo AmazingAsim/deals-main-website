@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 
-export default function TravelDeals() {
+export default function Products() {
   const [products, setProducts] = useState([]);
-
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const { productname } = useParams();
   const baseUrl = `http://localhost/product_api/get-products.php`;
 
   // Fetch products
   async function fetchProducts(newPage = page) {
     if (!hasMore && newPage !== 1) return;
+
     setLoading(true);
     try {
-      let res = await fetch(`${baseUrl}?&limit=30&category=Travel&page=${newPage}`);
+      let res = await fetch(`${baseUrl}?name=${productname}&limit=30&page=${newPage}`);
       let newProducts = await res.json();
 
       if (newPage === 1) {
@@ -23,7 +24,7 @@ export default function TravelDeals() {
       } else {
         setProducts((prev) => [...prev, ...newProducts]); // Append for infinite scroll
       }
-     
+
       setHasMore(newProducts.length === 10); // Stop fetching if less than 10 items
       setPage(newPage + 1);
     } catch (error) {
@@ -31,10 +32,14 @@ export default function TravelDeals() {
     }
     setLoading(false);
   }
-  useEffect(() => {
-    fetchProducts(1);
-  }, []);
 
+  // Fetch new data when storename changes
+  useEffect(() => {
+      setProducts([]);
+      setPage(1);
+      setHasMore(true);
+      fetchProducts(1);
+    }, [productname]);
   // Infinite Scroll Detection
   useEffect(() => {
     const handleScroll = () => {
@@ -45,9 +50,13 @@ export default function TravelDeals() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasMore, loading]);
+
   return (
-    <div className="container-fluid">
-      <div className="container">
+    <div className="container">
+       <h3 className="display-6">Showing results for {productname}</h3>
+      {
+        products.length > 0 ?  
+        
         <div className="row">
         {products.map((item, index) => (
           <div className="col-md-6">
@@ -55,7 +64,12 @@ export default function TravelDeals() {
           </div>
         ))}
         </div>
-      </div>
+            
+        : <div className="container text-danger">
+             <h2 className="display-3 text-center p-3">Result Not Found</h2>
+        </div>
+        
+      }
       {loading && <p>Loading more products...</p>}
     </div>
   );
