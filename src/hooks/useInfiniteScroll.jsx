@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useBaseUrl } from "../global/baseurlcontext";
 
 const useInfiniteScroll = (category = "",startDate = "",endDate = "") => {
 
@@ -6,14 +7,14 @@ const useInfiniteScroll = (category = "",startDate = "",endDate = "") => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const baseUrl = `http://localhost/product_api`
+  const baseUrl = useBaseUrl();
   // const baseUrl = ``
   const fetchProducts = async () => {
     if (!hasMore) return;
     console.log(category,startDate,endDate);
     setLoading(true);
     try {
-      const fetchQuery = `${baseUrl}/get-products.php?limit=10&page=${page}&category=${category}&start_date=${startDate}&end_date=${endDate}`
+      const fetchQuery = `${baseUrl}/product_api/get-products.php?limit=10&page=${page}&category=${category}&start_date=${startDate}&end_date=${endDate}`
       console.log(fetchQuery);
       const res = await fetch(fetchQuery);
       const newProducts = await res.json();

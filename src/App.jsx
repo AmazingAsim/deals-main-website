@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { BaseUrlProvider } from './global/baseurlcontext'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import LatestDeals from './pages/Latest_deals'
@@ -11,6 +11,7 @@ import Products from './pages/Products'
 export default function App() {
   return (
     <div>
+      <BaseUrlProvider>
       <BrowserRouter>
         <Navbar/>
         <Routes>
@@ -20,8 +21,10 @@ export default function App() {
           <Route path="/travel_deals" element={<TravelDeals />} />
           <Route path="/store/:storename" element={<Store />}></Route>
           <Route path="/products/:productname" element={<Products />}></Route>
+          <Route path="*" element={<Home />}/>
         </Routes>
       </BrowserRouter>
+      </BaseUrlProvider>
     </div>
   )
 }

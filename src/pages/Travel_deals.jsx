@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import { useBaseUrl } from "../global/baseurlcontext";
 
 export default function TravelDeals() {
   const [products, setProducts] = useState([]);
@@ -8,14 +8,15 @@ export default function TravelDeals() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const baseUrl = `http://localhost/product_api/get-products.php`;
+  const baseUrl = useBaseUrl()
+  const fetchUrl = `${baseUrl}/product_api/get-products.php`;
 
   // Fetch products
   async function fetchProducts(newPage = page) {
     if (!hasMore && newPage !== 1) return;
     setLoading(true);
     try {
-      let res = await fetch(`${baseUrl}?&limit=30&category=Travel&page=${newPage}`);
+      let res = await fetch(`${fetchUrl}?&limit=30&category=Travel&page=${newPage}`);
       let newProducts = await res.json();
 
       if (newPage === 1) {

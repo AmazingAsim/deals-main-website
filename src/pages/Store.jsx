@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import { useBaseUrl } from "../global/baseurlcontext";
 
 export default function Store() {
   const [products, setProducts] = useState([]);
@@ -8,7 +9,8 @@ export default function Store() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const { storename } = useParams();
-  const baseUrl = `http://localhost/product_api/get-products.php`;
+  const baseUrl = useBaseUrl()
+  const fetchUrl = `${baseUrl}/product_api/get-products.php`;
 
   // Fetch products
   async function fetchProducts(newPage = page) {
@@ -16,7 +18,7 @@ export default function Store() {
 
     setLoading(true);
     try {
-      let res = await fetch(`${baseUrl}?store_name=${storename}&limit=10&page=${newPage}`);
+      let res = await fetch(`${fetchUrl}?store_name=${storename}&limit=10&page=${newPage}`);
       let newProducts = await res.json();
 
       if (newPage === 1) {

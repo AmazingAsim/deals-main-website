@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import { useBaseUrl } from "../global/baseurlcontext";
 
 export default function Freebies() {
   const [products, setProducts] = useState([]);
-
+  const baseUrl = useBaseUrl()
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const baseUrl = `http://localhost/product_api/get-products.php`;
+  const fetchUrl = `${baseUrl}/product_api/get-products.php`;
 
   // Fetch products
   async function fetchProducts(newPage = page) {
@@ -16,7 +16,7 @@ export default function Freebies() {
 
     setLoading(true);
     try {
-      let res = await fetch(`${baseUrl}?&limit=30&price=0.00&page=${newPage}`);
+      let res = await fetch(`${fetchUrl}?&limit=30&price=0.00&page=${newPage}`);
       let newProducts = await res.json();
 
       if (newPage === 1) {

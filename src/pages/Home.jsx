@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import latest from '../assets/latest.PNG'
 import freebes from '../assets/freebes.PNG'
 import travel from '../assets/travelbanner.PNG'
+import { useBaseUrl } from "../global/baseurlcontext";
+import ScrollView from "../components/ScrollView";
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const baseUrl = `http://localhost/product_api/get-products.php`;
+  const baseUrl = useBaseUrl()
+  const fetchUrl = `${baseUrl}/product_api/get-products.php`;
 
+ 
 
   // Fetch products
   async function fetchProducts(newPage = page) {
@@ -18,7 +21,7 @@ export default function Home() {
 
     setLoading(true);
     try {
-      let res = await fetch(`${baseUrl}?&limit=30&page=${newPage}`);
+      let res = await fetch(`${fetchUrl}?&limit=30&page=${newPage}`);
       let newProducts = await res.json();
 
       if (newPage === 1) {
@@ -76,6 +79,8 @@ export default function Home() {
     <span className="visually-hidden">Next</span>
   </button>
 </div>
+      <ScrollView name="smartphone" filter="name" />
+      <ScrollView name="Electronics" filter="category" />
       <div className="container">
         <div className="row">
         {products.map((item, index) => (

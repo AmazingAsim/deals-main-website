@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function ProductCard({ product }) {
+export default function VerticalCard({ product }) {
   const {
     id, name, price, category, sub_category, product_link,
     description, image, created_at, store_name
@@ -13,24 +13,19 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="card mb-3 shadow-sm">
-      <div className="row g-0 align-items-center">
-        
-        {/* Image Section */}
-        <div className="col-md-4 col-sm-12 text-center p-3">
+       
           <img 
             src={`http://localhost/deals_admin/uploads/products/${image}`} 
             className="img-fluid rounded" 
             alt={name} 
-            style={{ maxHeight: "200px", objectFit: "cover", width: "100%" }}
+            style={{ maxHeight: "200px", objectFit: "contain", width: "100%" }}
           />
-          <h3 className="text-success mt-2">${price}</h3>
-        </div>
+         
+      
 
         {/* Product Details Section */}
-        <div className="col-md-8 col-sm-12 d-flex flex-column justify-content-between">
           <div className="card-body">
             <h4 className="card-title">{name}</h4>
-
             {/* Description with View More */}
             <p className="card-text text-muted">
               {expanded ? description : shortDescription}
@@ -43,9 +38,7 @@ export default function ProductCard({ product }) {
                 </button>
               )}
             </p>
-
             <p><b>Price: </b><i>${price}</i></p>
-
             <p className="card-text">
               <small className="text-muted">Store: <span className="text-primary">{store_name}</span></small><br />
               <small className="text-muted">Posted At: <span className="text-primary">{created_at}</span></small>
@@ -78,8 +71,6 @@ export default function ProductCard({ product }) {
               Shop Now
             </a>
           </div>
-        </div>
-      </div>
     </div>
   );
 }
