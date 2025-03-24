@@ -8,6 +8,7 @@ import Freebies from './pages/Freebies'
 import Navbar from './components/Navbar'
 import Store from './pages/Store'
 import Products from './pages/Products'
+import Category from './pages/Category'
 export default function App() {
   return (
     <div>
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/travel_deals" element={<TravelDeals />} />
           <Route path="/store/:storename" element={<Store />}></Route>
           <Route path="/products/:productname" element={<Products />}></Route>
+          <Route path="/category/:category" element={<Category />}></Route>
           <Route path="*" element={<Home />}/>
         </Routes>
       </BrowserRouter>

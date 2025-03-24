@@ -10,10 +10,17 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [categoryList, setCategoryList] = useState([]);
   const baseUrl = useBaseUrl()
   const fetchUrl = `${baseUrl}/product_api/get-products.php`;
 
  
+  async function getAllCategories() {
+    let res = await fetch(`${baseUrl}/product_api/list-category.php`);
+    let data = await res.json();
+    let List = data.map((item) => item.category);
+    setCategoryList(List);
+  }
 
   // Fetch products
   async function fetchProducts(newPage = page) {
@@ -39,6 +46,7 @@ export default function Home() {
   }
   useEffect(() => {
     fetchProducts(1);
+    getAllCategories();
   }, []);
 
   // Infinite Scroll Detection
@@ -79,9 +87,16 @@ export default function Home() {
     <span className="visually-hidden">Next</span>
   </button>
 </div>
+      {
+        categoryList.map((item, index) => (
+          <ScrollView key={index} name={item} filter="category" />
+        ))
+      }
       <ScrollView name="smartphone" filter="name" />
-      <ScrollView name="Electronics" filter="category" />
-      <div className="container">
+
+      <h2 className='border border-0 border-bottom border-3 border-primary fw-bold py-2 ms-5' style={{width:'fit-content'}}>Explore More...</h2>
+
+      <div className="container my-5">
         <div className="row">
         {products.map((item, index) => (
           <div className="col-md-6">

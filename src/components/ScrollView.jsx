@@ -11,10 +11,10 @@ export default function ScrollView({name,filter}) {
     async function getData() {
         let searchUrl = ''
         if(filter==='name'){
-            searchUrl = `${fetchUrl}?&limit=5&name=${name}`
+            searchUrl = `${fetchUrl}?&limit=4&name=${name}`
         }
         if(filter==='category'){
-            searchUrl = `${fetchUrl}?&limit=5&category=${name}`
+            searchUrl = `${fetchUrl}?&limit=4&category=${name}`
         }
         try {
          let res = await fetch(searchUrl);
@@ -29,14 +29,18 @@ export default function ScrollView({name,filter}) {
        },[])
   return (
    
-        <div className="container p-2 my-2">
-          <h2 className='w-50 border border-0 border-bottom border-3 border-primary fw-bold'>Grab Latest deals on {name}</h2>
+        <div className="container-fluid px-5 my-2">
+          <h2 className='border border-0 border-bottom border-3 border-primary fw-bold py-2' style={{width:'fit-content'}}>Grab Latest deals on {name}</h2>
           <div className="d-flex justify-content-end p-2">
              {
-                pdata.length>=5 && filter==='name' && <button onClick={() => navigate(`/products/${name}`)} className="btn btn-primary" >View All</button>
+                pdata.length>=4 && filter==='name' && <button onClick={() => navigate(`/products/${name}`)} className="btn btn-primary" >View All</button>
+             }
+             {
+                pdata.length>=4 && filter==='category' && <button onClick={() => navigate(`/category/${name}`)} className="btn btn-primary" >View All</button>
              }
           </div>
           <div className="row">
+           
               {
                 pdata.map((item, index) => (
                   <div className="col-md-3">
