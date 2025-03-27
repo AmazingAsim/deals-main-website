@@ -92,8 +92,7 @@ export default function Home() {
           <ScrollView key={index} name={item} filter="category" />
         ))
       }
-      <ScrollView name="smartphone" filter="name" />
-
+      
       <h2 className='border border-0 border-bottom border-3 border-primary fw-bold py-2 ms-5' style={{width:'fit-content'}}>Explore More...</h2>
 
       <div className="container my-5">

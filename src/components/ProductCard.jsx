@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 
 export default function ProductCard({ product }) {
   const {
-    id, name, price, category, sub_category, product_link,
-    description, image, created_at, store_name
-  } = product;
+    name, selling_price,original_price,currency, product_link,
+   description, image, created_at, store_name
+ } = product;
 
+ const discount = (((original_price-selling_price)/original_price)*100);
+ const formattedDiscount = discount.toFixed(2);
+ const dealType = discount>60?'Excellent Deal':discount>30?'Hot Deal':'';
   const [expanded, setExpanded] = useState(false);
 
   // Limit description to first 100 characters
@@ -17,13 +20,18 @@ export default function ProductCard({ product }) {
         
         {/* Image Section */}
         <div className="col-md-4 col-sm-12 text-center p-3">
+        <div className="position-absolute top-0 end-0 text-white px-2 py-1">
+               {
+                   dealType && <span className={` text-dark badge bg-${discount>60?'success':'warning'}`}>{dealType}</span>
+               }
+           </div>
           <img 
             src={`http://localhost/deals_admin/uploads/products/${image}`} 
             className="img-fluid rounded" 
             alt={name} 
             style={{ maxHeight: "200px", objectFit: "cover", width: "100%" }}
           />
-          <h3 className="text-success mt-2">${price}</h3>
+          <h3 className="text-success mt-2">${selling_price}</h3>
         </div>
 
         {/* Product Details Section */}
@@ -44,7 +52,8 @@ export default function ProductCard({ product }) {
               )}
             </p>
 
-            <p><b>Price: </b><i>${price}</i></p>
+            <p className='fs-4'><b className='text-success'>-{formattedDiscount}%</b> <i className='ms-3'>{currency==='INR'?'₹':'$'}{selling_price}</i></p>
+            <p className='text-muted fs-6'><small>MRP: <s>{currency==='INR'?'₹':'$'}{original_price}</s></small></p>
 
             <p className="card-text">
               <small className="text-muted">Store: <span className="text-primary">{store_name}</span></small><br />

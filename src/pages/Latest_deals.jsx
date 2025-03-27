@@ -30,6 +30,7 @@ const category=''
   return (
     <div>
       <div className="container">
+        <h2 className=' display-3 border border-0 border-bottom border-3 border-primary mb-5  py-2' style={{width:'fit-content'}}>Latest Deals</h2>
          <div className="row">
          {products.map((product) => (
            <div className="col-md-6">
