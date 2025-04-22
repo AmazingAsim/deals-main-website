@@ -5,6 +5,7 @@ import freebes from '../assets/freebes.PNG'
 import travel from '../assets/travelbanner.PNG'
 import { useBaseUrl } from "../global/baseurlcontext";
 import ScrollView from "../components/ScrollView";
+import Metadata from "../components/Metadata";
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -28,7 +29,7 @@ export default function Home() {
 
     setLoading(true);
     try {
-      let res = await fetch(`${fetchUrl}?&limit=30&page=${newPage}`);
+      let res = await fetch(`${fetchUrl}?&limit=30&page=${newPage}`,{method:"GET",mode:"cors"});
       let newProducts = await res.json();
 
       if (newPage === 1) {
@@ -61,6 +62,7 @@ export default function Home() {
   }, [hasMore, loading]);
   return (
     <div className="container-fluid">
+      <Metadata title="Deals In America" />
       <div id="carouselExampleIndicators" class="carousel slide mb-5"data-bs-ride="carousel" >
   <div className="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>

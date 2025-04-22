@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import { useBaseUrl } from '../global/baseurlcontext';
+import logo from '../assets/logo.png'
 export default function Navbar() {
   const[storeList,setStoreList] = useState([]);
   const [search,setSearch] = useState('');
@@ -40,7 +41,7 @@ export default function Navbar() {
         >
          <Link className="navbar-brand fw-bold fs-3 text-primary" to="/">
          <i class="fa-solid fa-signal"></i>
-         <span> DealsInAmerica</span>
+         <span> DealsfromAmerica</span>
          </Link>
          <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#asim">
            <span className="navbar-toggler-icon"></span>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useBaseUrl } from "../global/baseurlcontext";
-
+import Metadata from "../components/Metadata";
 export default function Freebies() {
   const [products, setProducts] = useState([]);
   const baseUrl = useBaseUrl()
@@ -48,6 +48,7 @@ export default function Freebies() {
   }, [hasMore, loading]);
   return (
     <div className="container-fluid">
+        <Metadata title="Deals In America" />
       <div className="container">
       <h2 className=' display-3 border border-0 border-bottom border-3 border-primary mb-5  py-2' style={{width:'fit-content'}}>Free For All</h2>
 

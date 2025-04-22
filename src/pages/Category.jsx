@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useBaseUrl } from "../global/baseurlcontext";
-
+import Metadata from "../components/Metadata";
 export default function Category() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -55,6 +55,7 @@ export default function Category() {
 
   return (
     <div className="container">
+       <Metadata title="Deals In America" />
        <h3 className="display-6">Showing results for {category}</h3>
       {
         products.length > 0 ?  

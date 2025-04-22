@@ -5,7 +5,7 @@ export const BaseUrlContext = createContext();
 export const useBaseUrl = () => useContext(BaseUrlContext);
 
 export const BaseUrlProvider = ({ children }) => {
-    // const baseUrl = "";
-    const baseUrl = "http://localhost";
+    const baseUrl = "https://dealsfromamerica.com";
+    // const baseUrl = "http://localhost";
     return <BaseUrlContext.Provider value={baseUrl}>{children}</BaseUrlContext.Provider>;
 }

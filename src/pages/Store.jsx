@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useBaseUrl } from "../global/baseurlcontext";
-
+import Metadata from "../components/Metadata";
 export default function Store() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -56,6 +56,7 @@ export default function Store() {
 
   return (
     <div className="container">
+      <Metadata title="Deals In America" />
       <h1>See Latest Deals from {storename}</h1>
       <div className="row">
       {products.map((item, index) => (

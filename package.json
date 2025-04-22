@@ -1,6 +1,7 @@
+
 {
   "name": "dealsv2",
-  "homepage": "/dealsv2/build",
+  "homepage": "https://dealsfromamerica.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

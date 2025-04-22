@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 export default function ProductCard({ product }) {
+  let imagBaseUrl = 'https://dealsfromamerica.com/employee/uploads/products';
+  // let imagBaseUrl = 'http://localhost/deals_admin/uploads/products/';
   const {
     name, selling_price,original_price,currency, product_link,
    description, image, created_at, store_name
@@ -26,7 +28,7 @@ export default function ProductCard({ product }) {
                }
            </div>
           <img 
-            src={`http://localhost/deals_admin/uploads/products/${image}`} 
+            src={`${imagBaseUrl}/${image}`} 
             className="img-fluid rounded" 
             alt={name} 
             style={{ maxHeight: "200px", objectFit: "cover", width: "100%" }}
