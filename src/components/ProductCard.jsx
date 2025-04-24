@@ -33,7 +33,7 @@ export default function ProductCard({ product }) {
             alt={name} 
             style={{ maxHeight: "200px", objectFit: "cover", width: "100%" }}
           />
-          <h3 className="text-success mt-2">${selling_price}</h3>
+          <h3 className="text-success mt-2">{currency}{selling_price}</h3>
         </div>
 
         {/* Product Details Section */}

@@ -87,6 +87,57 @@ nav ul li Link{
   padding: 50px;
 }
 
+.hscroll{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.hscroll div{
+  width: fit-content;
+  flex-shrink: 0;
+  animation-name:threwandfoward;
+  animation-duration: 10s;
+  animation-iteration-count:1;
+  animation-direction: alternate;
+}
+
+
+.hscroll::-webkit-scrollbar{
+  display: none;
+}
+
+#feedback_list_home{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 10px;
+  overflow-y: hidden;
+}
+#feedback_list_home>div{
+  animation-name:threwandfoward;
+  animation-duration: 10s;
+  animation-iteration-count:1;
+}
+
+#feedback_list_home::-webkit-scrollbar{
+  display: none;
+}
+
+@keyframes threwandfoward {
+  0%{
+    transform: translateX(0);
+  }
+  50%{
+    transform: translateX(300px);
+  }
+  100%{
+    transform: translateX(0px);
+  }
+  
+}
+
 @media screen and (max-width: 768px) {
   .carousel-control-next-icon, .carousel-control-prev-icon {
     padding: 20px;
@@ -94,5 +145,11 @@ nav ul li Link{
   }
   .carousel{
     height: 20vh;
+  }
+  #feedback_card{
+    width: 100% !important;
+    padding: 2px;
+    margin:0px !important;
+    box-sizing: border-box;
   }
 }

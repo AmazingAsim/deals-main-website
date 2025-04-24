@@ -19,7 +19,7 @@ const useInfiniteScroll = (category = "",startDate = "",endDate = "") => {
       const res = await fetch(fetchQuery);
       const newProducts = await res.json();
       console.log(newProducts);
-      if (newProducts.length < 10) setHasMore(false); // No more products
+      if (newProducts.length < 1) setHasMore(false); // No more products
       setProducts((prev) => [...prev, ...newProducts]); // Append new products
       setPage((prev) => prev + 1);
     } 
