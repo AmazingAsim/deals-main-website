@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useBaseUrl } from "../global/baseurlcontext";
 import Metadata from "../components/Metadata";
+import AmazonData from "../components/AmazonData";
+import Footer from "../components/Footer";
 export default function TravelDeals() {
   const [products, setProducts] = useState([]);
 
@@ -47,10 +49,11 @@ export default function TravelDeals() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasMore, loading]);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-5">
       <Metadata title="Deals In America" />
       <div className="container">
       <h2 className=' display-3 border border-0 border-bottom border-3 border-primary mb-5  py-2' style={{width:'fit-content'}}>Travel Deals</h2>
+        <AmazonData keyword="Travel Deals" />
 
         <div className="row">
         {products.map((item, index) => (
@@ -61,6 +64,9 @@ export default function TravelDeals() {
         </div>
       </div>
       {loading && <p>Loading more products...</p>}
+      <Footer />
     </div>
   );
 }
+
+

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useBaseUrl } from "../global/baseurlcontext";
 import Metadata from "../components/Metadata";
+import Footer from "../components/Footer";
 export default function Freebies() {
   const [products, setProducts] = useState([]);
   const baseUrl = useBaseUrl()
@@ -47,9 +48,9 @@ export default function Freebies() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasMore, loading]);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-5">
         <Metadata title="Deals In America" />
-      <div className="container">
+      <div className="container" style={{minHeight:"63vh"}}>
       <h2 className=' display-3 border border-0 border-bottom border-3 border-primary mb-5  py-2' style={{width:'fit-content'}}>Free For All</h2>
 
         <div className="row">
@@ -61,6 +62,9 @@ export default function Freebies() {
         </div>
       </div>
       {loading && <p>Loading more products...</p>}
+      <div>
+        <Footer/>
+      </div>
     </div>
   );
 }
