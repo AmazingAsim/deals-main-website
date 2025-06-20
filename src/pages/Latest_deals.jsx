@@ -29,7 +29,7 @@ const category=''
 
   return (
     <div>
-      <div className="container">
+      <div className="container my-5">
           <Metadata title="Deals In America" />
         <h2 className=' display-3 border border-0 border-bottom border-3 border-primary mb-5  py-2' style={{width:'fit-content'}}>Latest Deals</h2>
          <div className="row">

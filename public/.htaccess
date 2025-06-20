@@ -1,15 +1,25 @@
-<!-- Options -Indexes
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.html [L,QSA] -->
-
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+    RewriteEngine On
+    RewriteBase /
+
+    # === Handle product pages for bots ===
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yahoo|baiduspider|facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|pinterest|applebot|whatsapp) [NC]
+    RewriteRule ^product-details/([a-zA-Z0-9]+)(?:/[^/]+)?/?$ product-details.php?id=$1 [L,QSA]
+
+    # === Prerender.io for other bot requests ===
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteCond %{REQUEST_URI} !^/product-details/ [NC]
+    RewriteCond %{REQUEST_URI} !\.(js|css|xml|png|jpg|jpeg|gif|svg|ico|json|woff|woff2|ttf|eot|map)$ [NC]
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yahoo|baiduspider|facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|pinterest|applebot|whatsapp) [NC]
+    RewriteRule ^(.*)$ https://service.prerender.io/https://dealsfromamerica.com/$1 [P,L]
+
+    # === React SPA fallback ===
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    RequestHeader set X-Prerender-Token "wjPkFoWFE2fpcu6e0waq"
 </IfModule>

@@ -75,7 +75,7 @@ function FeedbackList() {
                     <p>No feedback available.</p>
                 ) : (
                     feedbacks.map((item, index) => (
-                        <div key={index} className="row border p-3 rounded-2" style={{ width: "400px", flexShrink: "0" }} id="feedback_card">
+                        <div key={index} className="row border p-3 rounded-2 bg-dark text-light " style={{ width: "400px", flexShrink: "0" }} id="feedback_card">
                             <div className="col-md-2 d-flex align-items-center justify-content-center flex-column">
                                 <Avatar name={item.name} />
                             </div>
